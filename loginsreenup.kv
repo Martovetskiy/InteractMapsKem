@@ -1,0 +1,45 @@
+<LoginScreen1>:
+    canvas:
+        Color:
+            rgb: (0, 0, 1)
+    name: "loginScreen1"
+    id: login_screen1
+    FloatLayout:
+        TextInput:
+            id: login_email
+            hint_text: "email"
+            size_hint: .8, .1
+            pos_hint: {"top": .9, "right": .9}
+        TextInput:
+            id: login_password
+            password: True
+            hint_text: "password"
+            size_hint: .8, .1
+            pos_hint: {"top": .7, "right": .9}
+        Label:
+            id: login1
+            text: "ВХОД"
+            color: (0,0,0)
+            size_hint: .8, .1
+            pos_hint: {"top": .99, "right": .9}
+        Label:
+            id: login_massage1
+            text: " "
+            color: (1,0,0)
+            size_hint: .8, .1
+            pos_hint: {"top": .4, "right": .9}
+        Button:
+            canvas:
+                Color:
+                    rgb: (1,0,0) if self.state == 'normal'  else (1,1,0)
+            text: "[u]Войти[/u]"
+            markup: True
+            size_hint: .8, .1
+            pos_hint: {"top": .2, "right": .9}
+            on_release:
+                app.my_firebase.sign_in_existing_user(login_email.text, login_password.text)
+        Button:
+            size_hint: .25, 0.10
+            pos_hint: {"top": .3, "right": .35}
+            text: "<-Регистрация"
+            on_release: app.root.current = "loginScreen"
